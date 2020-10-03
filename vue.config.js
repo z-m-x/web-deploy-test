@@ -1,5 +1,6 @@
-module.exports={
-    devServer:{
-        open:true,
-    }
-}
+module.exports = {
+  publicPath: "./",
+  devServer: {
+    open: true,
+  },
+};

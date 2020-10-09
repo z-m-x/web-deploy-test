@@ -4,7 +4,7 @@ const renderModules = {};
 ctx.keys().forEach((item) => {
   renderModules[item.replace(/^\.\/(.*)\.\w+$/, "$1")] = ctx(item).default;
 });
-var formData = null; //拷贝一份form初始值
+var formDatas = null; //拷贝一份form初始值
 export default {
   name: "myform",
   inheritAttrs: false,
@@ -84,13 +84,14 @@ export default {
         }
       }
     });
+
+    formDatas = JSON.parse(JSON.stringify(this.formData)); //拷贝form初始值用于手动重置
     /* 用于回显,做字段合并*/
     formData && this.mergeFormData();
     /* 用于异步拉取数据字典字段 */
     formConfigData && this.mergeFormConfigData();
   },
   mounted() {
-    formData = JSON.parse(JSON.stringify(this.formData)); //拷贝form初始值用于手动重置
     /* 挂载自己封装的方法到实例上 */
     this.$refs.myForm.resetFieldsFn = this.resetFieldsFn;
     /* 给组件返回当前实例 */
@@ -218,9 +219,9 @@ export default {
         let showedForm = this.$attrs.show;
         Array.isArray(showedForm)
           ? showedForm.forEach((i) => {
-              this.formData[i] = formData[i];
+              this.formData[i] = formDatas[i];
             })
-          : (this.formData[showedForm] = formData[showedForm]);
+          : (this.formData[showedForm] = formDatas[showedForm]);
       });
     },
   },

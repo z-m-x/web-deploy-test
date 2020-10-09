@@ -1,6 +1,6 @@
 git pull
 
-yarn --registry=https://registry.npm.taobao.org/ && yarn build
+#yarn --registry=https://registry.npm.taobao.org/ && yarn build
 
 #删除容器
 docker rm -f demo1 &> /dev/null
